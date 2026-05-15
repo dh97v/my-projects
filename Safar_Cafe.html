@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Safar Cafe | كافيه سفر</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sky: #0ea5e9;
+  --sky-light: #7dd3fc;
+  --navy: #1e3a8a;
+  --navy-dark: #0f172a;
+  --silver: #94a3b8;
+  --cloud: #f1f5f9;
+  --glass: rgba(255,255,255,0.06);
+  --glass-border: rgba(255,255,255,0.12);
+  --text: #f8fafc;
+  --text-muted: #94a3b8;
+  --bg: #0f172a;
+  --bg-light: #1e293b;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Tajawal', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+.bg-sky {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(ellipse at 20% 30%, rgba(14,165,233,0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(30,58,138,0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(148,163,184,0.05) 0%, transparent 60%);
+}
+
+/* Clouds Animation */
+.clouds {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.cloud {
+  position: absolute;
+  background: rgba(255,255,255,0.03);
+  border-radius: 100px;
+  animation: drift linear infinite;
+}
+.cloud:nth-child(1) { width: 200px; height: 60px; top: 20%; animation-duration: 25s; }
+.cloud:nth-child(2) { width: 300px; height: 80px; top: 40%; animation-duration: 35s; animation-delay: -10s; }
+.cloud:nth-child(3) { width: 150px; height: 50px; top: 60%; animation-duration: 20s; animation-delay: -5s; }
+.cloud:nth-child(4) { width: 250px; height: 70px; top: 80%; animation-duration: 30s; animation-delay: -15s; }
+@keyframes drift {
+  0% { transform: translateX(-100vw); }
+  100% { transform: translateX(100vw); }
+}
+
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 1.2rem 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.4s ease;
+}
+nav.scrolled {
+  background: rgba(15,23,42,0.92);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+}
+.logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--sky-light), var(--sky));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  letter-spacing: -1px;
+}
+.logo-icon {
+  width: 40px; height: 40px;
+  background: linear-gradient(135deg, var(--sky), var(--navy));
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 1.3rem;
+  -webkit-text-fill-color: white;
+  box-shadow: 0 4px 15px rgba(14,165,233,0.4);
+}
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  right: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--sky-light), var(--sky));
+  transition: width 0.3s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a:hover::after { width: 100%; }
+
+/* Hero */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8rem 5% 4rem;
+  position: relative;
+  text-align: center;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(14,165,233,0.15) 0%, transparent 60%);
+  animation: floatSky 8s ease-in-out infinite;
+}
+@keyframes floatSky {
+  0%,100% { transform: translateX(-50%) scale(1) translateY(0); }
+  50% { transform: translateX(-50%) scale(1.1) translateY(-20px); }
+}
+.hero-content { max-width: 700px; z-index: 2; position: relative; }
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1.5rem;
+  background: linear-gradient(135deg, rgba(14,165,233,0.2), rgba(30,58,138,0.15));
+  border: 1px solid rgba(14,165,233,0.3);
+  border-radius: 100px;
+  font-size: 0.85rem;
+  color: var(--sky-light);
+  margin-bottom: 2rem;
+  font-family: 'Space Grotesk', sans-serif;
+}
+.hero h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, #fff 0%, var(--sky-light) 50%, var(--sky) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -2px;
+}
+.hero p {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+  max-width: 500px;
+  margin-inline: auto;
+  line-height: 1.8;
+}
+.cta-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn {
+  padding: 1rem 2.5rem;
+  border-radius: 14px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+.btn-sky {
+  background: linear-gradient(135deg, var(--sky), var(--navy));
+  color: white;
+  box-shadow: 0 10px 40px rgba(14,165,233,0.35);
+}
+.btn-sky:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 60px rgba(14,165,233,0.45);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--glass-border);
+}
+.btn-outline:hover {
+  background: var(--glass);
+  border-color: var(--sky);
+  transform: translateY(-3px);
+}
+
+/* Plane Window Cards */
+.windows-section {
+  padding: 4rem 5%;
+}
+.windows-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.window-card {
+  padding: 2.5rem;
+  border-radius: 30px;
+  transition: all 0.5s cubic-bezier(0.4,0,0.2,1);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+.window-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(14,165,233,0.15) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.window-card:hover::before { opacity: 1; }
+.window-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+  border-color: rgba(14,165,233,0.3);
+}
+.window-frame {
+  width: 100px; height: 100px;
+  margin: 0 auto 1.5rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--sky), var(--navy));
+  display: grid;
+  place-items: center;
+  font-size: 2.5rem;
+  box-shadow: 0 10px 40px rgba(14,165,233,0.3);
+  position: relative;
+}
+.window-frame::after {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border: 2px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+}
+.window-card h3 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 0.8rem;
+}
+.window-card p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+/* Sections */
+section { padding: 6rem 5%; position: relative; }
+.section-header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 4rem;
+}
+.section-header h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #fff, var(--sky-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -1px;
+}
+.section-header p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+/* Experience */
+.experience-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.exp-card {
+  padding: 2rem;
+  border-radius: 20px;
+  transition: all 0.4s;
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+.exp-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(14,165,233,0.3);
+}
+.exp-icon {
+  width: 60px; height: 60px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--sky), var(--navy));
+  display: grid;
+  place-items: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  box-shadow: 0 8px 25px rgba(14,165,233,0.3);
+}
+.exp-content h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+.exp-content p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; }
+
+/* Menu */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.menu-card {
+  padding: 2rem;
+  border-radius: 20px;
+  transition: all 0.4s;
+  text-align: center;
+}
+.menu-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(14,165,233,0.3);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+}
+.menu-icon {
+  width: 70px; height: 70px;
+  margin: 0 auto 1.5rem;
+  background: linear-gradient(135deg, var(--sky), var(--navy));
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 1.8rem;
+  box-shadow: 0 10px 40px rgba(14,165,233,0.3);
+}
+.menu-card h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 0.5rem; }
+.menu-card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; }
+.menu-card .price {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--sky-light);
+}
+
+/* Contact */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.contact-card {
+  padding: 2rem;
+  border-radius: 20px;
+  text-align: center;
+  transition: all 0.4s;
+}
+.contact-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--sky);
+}
+.contact-icon {
+  width: 55px; height: 55px;
+  margin: 0 auto 1.2rem;
+  background: linear-gradient(135deg, var(--sky), var(--navy));
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  font-size: 1.4rem;
+  box-shadow: 0 8px 25px rgba(14,165,233,0.3);
+}
+.contact-card h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
+.contact-card p { color: var(--text-muted); font-size: 0.9rem; }
+
+/* Footer */
+footer {
+  padding: 3rem 5%;
+  text-align: center;
+  border-top: 1px solid var(--glass-border);
+  background: rgba(15,23,42,0.6);
+  backdrop-filter: blur(10px);
+}
+footer p { color: var(--text-muted); font-size: 0.9rem; font-family: 'Space Grotesk', sans-serif; }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.4,0,0.2,1);
+}
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hero-visual { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="bg-sky"></div>
+<div class="clouds">
+  <div class="cloud"></div>
+  <div class="cloud"></div>
+  <div class="cloud"></div>
+  <div class="cloud"></div>
+</div>
+
+<nav id="navbar">
+  <div class="logo">
+    <div class="logo-icon">✈️</div>
+    Safar
+  </div>
+  <ul class="nav-links">
+    <li><a href="#home">الرئيسية</a></li>
+    <li><a href="#experience">التجربة</a></li>
+    <li><a href="#menu">المنيو</a></li>
+    <li><a href="#gallery">المكان</a></li>
+    <li><a href="#contact">الموقع</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span style="width:8px;height:8px;background:var(--sky-light);border-radius:50%;display:inline-block;animation:pulse 2s infinite;"></span>
+      نزوى · مقهى بطابع طيران · تقييم 4.6
+    </div>
+    <h1>رحلتك تبدأ<br>من هنا ✈️</h1>
+    <p>كافيه سفر في نزوى يأخذك في رحلة بصرية وفنية داخل مقصورة طائرة فاخرة. استمتع بقهوتك وأنت تتأمل السحب من نافذتك.</p>
+    <div class="cta-group">
+      <a href="#menu" class="btn btn-sky">استكشف المنيو</a>
+      <a href="#experience" class="btn btn-outline">تجربة الطيران</a>
+    </div>
+  </div>
+</section>
+
+<div class="windows-section">
+  <div class="windows-grid">
+    <div class="window-card glass reveal">
+      <div class="window-frame">🪟</div>
+      <h3>نوافذ الطائرة</h3>
+      <p>جلسات مصممة داخل إطارات نوافذ طائرة حقيقية مع إطلالات سينمائية.</p>
+    </div>
+    <div class="window-card glass reveal">
+      <div class="window-frame">💺</div>
+      <h3>مقاعد درجة أولى</h3>
+      <p>مقاعد فاخرة مستوحاة من درجة رجال الأعمال مع إضاءة وتقنيات عصرية.</p>
+    </div>
+    <div class="window-card glass reveal">
+      <div class="window-frame">☁️</div>
+      <h3>أجواء السحب</h3>
+      <p>إضاءة متغيرة تحاكي أجواء الطيران مع تأثيرات ضوئية سينمائية.</p>
+    </div>
+  </div>
+</div>
+
+<section id="experience">
+  <div class="section-header reveal">
+    <h2>تجربة سفر</h2>
+    <p>كل تفصيل يحاكي رحلة جوية فاخرة</p>
+  </div>
+  <div class="experience-grid">
+    <div class="exp-card glass reveal">
+      <div class="exp-icon">✈️</div>
+      <div class="exp-content">
+        <h3>بوابة الصعود</h3>
+        <p>مدخل الكافيه مصمم كبوابة صعود حقيقية مع بطاقة صعود افتراضية لكل زائر.</p>
+      </div>
+    </div>
+    <div class="exp-card glass reveal">
+      <div class="exp-icon">🎧</div>
+      <div class="exp-content">
+        <h3>أصوات الرحلة</h3>
+        <p>أصوات محركات وإعلانات كابينة طيران خلفية لخلق أجواء غامرة.</p>
+      </div>
+    </div>
+    <div class="exp-card glass reveal">
+      <div class="exp-icon">📸</div>
+      <div class="exp-content">
+        <h3>زوايا تصوير</h3>
+        <p>كل زاوية في الكافيه مصممة لتكون خلفية مثالية للصور الإنستغرامية.</p>
+      </div>
+    </div>
+    <div class="exp-card glass reveal">
+      <div class="exp-icon">🍽️</div>
+      <div class="exp-content">
+        <h3>خدمة على متن الطائرة</h3>
+        <p>المشروبات والوجبات تقدم على صواني طيران أنيقة مع أدوات فاخرة.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="section-header reveal">
+    <h2>منيو الرحلة</h2>
+    <p>مشروبات ووجبات تُقدم على طريقة الخطوط الجوية الفاخرة</p>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card glass reveal">
+      <div class="menu-icon">☕</div>
+      <h3>قهوة "الكابتن"</h3>
+      <p>إسبريسو مزدوج مع رغوة حليب كريمية وتحريك يدوي.</p>
+      <span class="price">2.5 ر.ع</span>
+    </div>
+    <div class="menu-card glass reveal">
+      <div class="menu-icon">🍵</div>
+      <h3>شاي "درجة أولى"</h3>
+      <p>مزيج شاي أزرق بالزهر مع لمسة من الفانيليا والحليب.</p>
+      <span class="price">3 ر.ع</span>
+    </div>
+    <div class="menu-card glass reveal">
+      <div class="menu-icon">🍰</div>
+      <h3>كيكة "السحب"</h3>
+      <p>كيكة فانيليا هوائية مع كريمة خفيفة وتوت طازج.</p>
+      <span class="price">2.8 ر.ع</span>
+    </div>
+    <div class="menu-card glass reveal">
+      <div class="menu-icon">🥪</div>
+      <h3>ساندويتش "الرحلة"</h3>
+      <p>ساندويتش دجاج مشوي مع جبنة وجوار فاخر على خبز بريوش.</p>
+      <span class="price">3.5 ر.ع</span>
+    </div>
+    <div class="menu-card glass reveal">
+      <div class="menu-icon">🍹</div>
+      <h3>عصير "الإقلاع"</h3>
+      <p>مزيج برتقال، منجا، وPassion Fruit مع مكعبات ثلج كريستالية.</p>
+      <span class="price">2.5 ر.ع</span>
+    </div>
+    <div class="menu-card glass reveal">
+      <div class="menu-icon">🧁</div>
+      <h3>كب كيك "الغيوم"</h3>
+      <p>كب كيك فانيليا مع frosting زهري وكريمة خفيفة كالغيوم.</p>
+      <span class="price">1.8 ر.ع</span>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-header reveal">
+    <h2>وجهتك القادمة</h2>
+    <p>زورونا في نزوى واستعدوا للإقلاع</p>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-card glass reveal">
+      <div class="contact-icon">📍</div>
+      <h3>الموقع</h3>
+      <p>نزوى<br>سلطنة عُمان</p>
+    </div>
+    <div class="contact-card glass reveal">
+      <div class="contact-icon">🕐</div>
+      <h3>ساعات العمل</h3>
+      <p>يومياً<br>8:00 ص - 12:00 ص</p>
+    </div>
+    <div class="contact-card glass reveal">
+      <div class="contact-icon">⭐</div>
+      <h3>التقييم</h3>
+      <p>4.6/5<br>126 مراجعة</p>
+    </div>
+    <div class="contact-card glass reveal">
+      <div class="contact-icon">📱</div>
+      <h3>الحجز</h3>
+      <p>متاح عبر<br>الواتساب</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Safar Cafe · نزوى، سلطنة عُمان · Fasten Your Seatbelt ☕✈️</p>
+</footer>
+
+<script>
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 50) navbar.classList.add('scrolled');
+  else navbar.classList.remove('scrolled');
+});
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+</body>
+</html>

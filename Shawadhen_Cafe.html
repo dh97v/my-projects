@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shawadhen Cafe | مقهى شواذن</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=DM+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root { --amber: #d97706; --amber-light: #fcd34d; --brown: #451a03; --glass: rgba(255,255,255,0.06); --glass-border: rgba(255,255,255,0.12); --text: #fafafa; --text-muted: #a3a3a3; --bg: #1a1209; --bg-light: #2e2010; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Tajawal', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+.bg-amber { position: fixed; inset: 0; z-index: -2; background: radial-gradient(ellipse at 30% 20%, rgba(217,119,6,0.1) 0%, transparent 50%), radial-gradient(ellipse at 70% 80%, rgba(252,211,77,0.05) 0%, transparent 50%); }
+.glass { background: var(--glass); backdrop-filter: blur(24px) saturate(160%); -webkit-backdrop-filter: blur(24px) saturate(160%); border: 1px solid var(--glass-border); box-shadow: 0 8px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06); }
+nav { position: fixed; top: 0; width: 100%; z-index: 1000; padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center; transition: all 0.4s ease; }
+nav.scrolled { background: rgba(26,18,9,0.92); backdrop-filter: blur(20px); }
+.logo { font-family: 'DM Sans', sans-serif; font-size: 1.8rem; font-weight: 800; background: linear-gradient(135deg, var(--amber-light), var(--amber)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: all 0.3s; position: relative; }
+.nav-links a::after { content: ''; position: absolute; bottom: -4px; right: 0; width: 0; height: 2px; background: var(--amber-light); transition: width 0.3s; }
+.nav-links a:hover { color: var(--text); }
+.nav-links a:hover::after { width: 100%; }
+.hero { min-height: 100vh; display: flex; align-items: center; padding: 8rem 5% 4rem; position: relative; }
+.hero::before { content: ''; position: absolute; top: -20%; right: -10%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(217,119,6,0.15) 0%, transparent 60%); animation: floatAmber 10s ease-in-out infinite; }
+@keyframes floatAmber { 0%,100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+.hero-content { max-width: 600px; z-index: 2; }
+.hero-badge { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.5rem 1.2rem; background: rgba(217,119,6,0.15); border: 1px solid rgba(217,119,6,0.3); border-radius: 100px; font-size: 0.85rem; color: var(--amber-light); margin-bottom: 1.5rem; }
+.hero h1 { font-family: 'DM Sans', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; background: linear-gradient(135deg, #fff, var(--amber-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero p { font-size: 1.15rem; color: var(--text-muted); margin-bottom: 2.5rem; max-width: 480px; line-height: 1.8; }
+.cta-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn { padding: 1rem 2.5rem; border-radius: 14px; font-family: inherit; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.4s cubic-bezier(0.4,0,0.2,1); border: none; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; }
+.btn-amber { background: linear-gradient(135deg, var(--amber), #92400e); color: white; box-shadow: 0 10px 40px rgba(217,119,6,0.35); }
+.btn-amber:hover { transform: translateY(-3px); box-shadow: 0 20px 60px rgba(217,119,6,0.45); }
+.btn-outline { background: transparent; color: var(--text); border: 1px solid var(--glass-border); }
+.btn-outline:hover { background: var(--glass); border-color: var(--amber-light); transform: translateY(-3px); }
+section { padding: 6rem 5%; position: relative; }
+.section-header { text-align: center; max-width: 600px; margin: 0 auto 4rem; }
+.section-header h2 { font-family: 'DM Sans', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-bottom: 1rem; background: linear-gradient(135deg, #fff, var(--amber-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.section-header p { color: var(--text-muted); font-size: 1.1rem; }
+.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; max-width: 1000px; margin: 0 auto; }
+.service-card { padding: 2rem; border-radius: 20px; text-align: center; transition: all 0.4s; }
+.service-card:hover { transform: translateY(-5px); background: rgba(255,255,255,0.08); }
+.service-icon { width: 60px; height: 60px; margin: 0 auto 1.2rem; background: linear-gradient(135deg, var(--amber), #92400e); border-radius: 50%; display: grid; place-items: center; font-size: 1.6rem; box-shadow: 0 8px 25px rgba(217,119,6,0.3); }
+.menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; max-width: 1000px; margin: 0 auto; }
+.menu-card { padding: 2rem; border-radius: 20px; transition: all 0.4s; text-align: center; }
+.menu-card:hover { transform: translateY(-8px); border-color: rgba(217,119,6,0.3); box-shadow: 0 25px 50px rgba(0,0,0,0.3); }
+.menu-icon { width: 70px; height: 70px; margin: 0 auto 1.5rem; background: linear-gradient(135deg, var(--amber), #92400e); border-radius: 50%; display: grid; place-items: center; font-size: 1.8rem; box-shadow: 0 10px 40px rgba(217,119,6,0.3); }
+.menu-card h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 0.5rem; }
+.menu-card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; }
+.menu-card .price { font-family: 'DM Sans', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--amber-light); }
+.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; max-width: 900px; margin: 0 auto; }
+.contact-card { padding: 2rem; border-radius: 20px; text-align: center; transition: all 0.4s; }
+.contact-card:hover { transform: translateY(-5px); border-color: var(--amber); }
+.contact-icon { width: 55px; height: 55px; margin: 0 auto 1.2rem; background: linear-gradient(135deg, var(--amber), #92400e); border-radius: 16px; display: grid; place-items: center; font-size: 1.4rem; box-shadow: 0 8px 25px rgba(217,119,6,0.3); }
+.contact-card h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
+.contact-card p { color: var(--text-muted); font-size: 0.9rem; }
+footer { padding: 3rem 5%; text-align: center; border-top: 1px solid var(--glass-border); background: rgba(26,18,9,0.6); backdrop-filter: blur(10px); }
+footer p { color: var(--text-muted); font-size: 0.9rem; }
+.reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.4,0,0.2,1); }
+.reveal.active { opacity: 1; transform: translateY(0); }
+@media (max-width: 768px) { .nav-links { display: none; } }
+</style>
+</head>
+<body>
+<div class="bg-amber"></div>
+<nav id="navbar"><div class="logo">شواذن</div><ul class="nav-links"><li><a href="#home">الرئيسية</a></li><li><a href="#services">الخدمات</a></li><li><a href="#menu">المنيو</a></li><li><a href="#contact">الموقع</a></li></ul></nav>
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-badge">نزوى · مقهى دافئ · تقييم 4.5 ⭐</div>
+    <h1>شواذن<br>للأجواء الدافئة ☕</h1>
+    <p>مقهى شواذن يقدم لك أجواء دافئة ومريحة في قلب نزوى. قهوة عربية، شاي كرك، وأطباق خفيفة لذيذة.</p>
+    <div class="cta-group"><a href="#menu" class="btn btn-amber">استكشف المنيو</a><a href="#services" class="btn btn-outline">خدماتنا</a></div>
+  </div>
+</section>
+<section id="services">
+  <div class="section-header reveal"><h2>خدمات شواذن</h2><p>أكثر من مجرد قهوة</p></div>
+  <div class="services-grid">
+    <div class="service-card glass reveal"><div class="service-icon">☕</div><h3>قهوة عربية</h3><p>قهوة عربية أصيلة محضرة على الطريقة التقليدية.</p></div>
+    <div class="service-card glass reveal"><div class="service-icon">🍵</div><h3>شاي كرك</h3><p>شاي كرك عماني بالحليب والهيل والزعفران.</p></div>
+    <div class="service-card glass reveal"><div class="service-icon">🎵</div><h3>أمسيات موسيقية</h3><p>أمسيات موسيقية حية كل خميس وجمعة.</p></div>
+    <div class="service-card glass reveal"><div class="service-icon">📸</div><h3>أجواء تراثية</h3><p>ديكور تراثي عماني أصيل للتصوير والذكريات.</p></div>
+  </div>
+</section>
+<section id="menu">
+  <div class="section-header reveal"><h2>منيو شواذن</h2><p>نكهات عمانية أصيلة</p></div>
+  <div class="menu-grid">
+    <div class="menu-card glass reveal"><div class="menu-icon">☕</div><h3>قهوة عربية</h3><p>قهوة عربية أصيلة مع الهيل والزعفران.</p><span class="price">1.5 ر.ع</span></div>
+    <div class="menu-card glass reveal"><div class="menu-icon">🍵</div><h3>شاي كرك</h3><p>شاي كرك عماني بالحليب والهيل.</p><span class="price">1 ر.ع</span></div>
+    <div class="menu-card glass reveal"><div class="menu-icon">🌴</div><h3>تمر عماني</h3><p>تمر خلاص عماني فاخر مع القهوة.</p><span class="price">2 ر.ع</span></div>
+    <div class="menu-card glass reveal"><div class="menu-icon">🥮</div><h3>عصيدة</h3><p>عصيدة تقليدية عمانية مع السمن.</p><span class="price">3 ر.ع</span></div>
+    <div class="menu-card glass reveal"><div class="menu-icon">🍰</div><h3>كيكة التمر</h3><p>كيكة منزلية بالتمر العماني.</p><span class="price">2.5 ر.ع</span></div>
+    <div class="menu-card glass reveal"><div class="menu-icon">🍹</div><h3>عصير ليمون نعناع</h3><p>عصير ليمون طازج مع نعناع.</p><span class="price">1.8 ر.ع</span></div>
+  </div>
+</section>
+<section id="contact">
+  <div class="section-header reveal"><h2>زورونا</h2><p>ننتظركم في شواذن</p></div>
+  <div class="contact-grid">
+    <div class="contact-card glass reveal"><div class="contact-icon">📍</div><h3>الموقع</h3><p>نزوى<br>سلطنة عُمان</p></div>
+    <div class="contact-card glass reveal"><div class="contact-icon">⭐</div><h3>التقييم</h3><p>4.5/5<br>100+ مراجعة</p></div>
+    <div class="contact-card glass reveal"><div class="contact-icon">🕐</div><h3>العمل</h3><p>يومياً<br>7:00 ص - 11:00 م</p></div>
+    <div class="contact-card glass reveal"><div class="contact-icon">📱</div><h3>الحجز</h3><p>متاح عبر<br>الواتساب</p></div>
+  </div>
+</section>
+<footer><p>© 2026 Shawadhen Cafe · نزوى، سلطنة عُمان</p></footer>
+<script>
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{if(window.scrollY>50)navbar.classList.add('scrolled');else navbar.classList.remove('scrolled');});
+const observer=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('active');});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+document.querySelectorAll('a[href^="#"]').forEach(anchor=>{anchor.addEventListener('click',function(e){e.preventDefault();document.querySelector(this.getAttribute('href')).scrollIntoView({behavior:'smooth'});});});
+</script>
+</body>
+</html>

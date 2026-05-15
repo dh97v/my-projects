@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mqeel Cafe | كافيه مقيل</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=DM+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root { --warm: #ea580c; --warm-light: #fdba74; --beige: #fff7ed; --glass: rgba(255,255,255,0.06); --glass-border: rgba(255,255,255,0.12); --text: #fafafa; --text-muted: #a3a3a3; --bg: #1a120b; --bg-light: #2e2015; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Tajawal', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+.bg-warm { position: fixed; inset: 0; z-index: -2; background: radial-gradient(ellipse at 30% 20%, rgba(234,88,12,0.1) 0%, transparent 50%), radial-gradient(ellipse at 70% 80%, rgba(253,186,116,0.05) 0%, transparent 50%); }
+.glass { background: var(--glass); backdrop-filter: blur(24px) saturate(160%); -webkit-backdrop-filter: blur(24px) saturate(160%); border: 1px solid var(--glass-border); box-shadow: 0 8px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06); }
+nav { position: fixed; top: 0; width: 100%; z-index: 1000; padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center; transition: all 0.4s ease; }
+nav.scrolled { background: rgba(26,18,11,0.92); backdrop-filter: blur(20px); }
+.logo { font-family: 'DM Sans', sans-serif; font-size: 1.8rem; font-weight: 800; background: linear-gradient(135deg, var(--warm-light), var(--warm)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: all 0.3s; position: relative; }
+.nav-links a::after { content: ''; position: absolute; bottom: -4px; right: 0; width: 0; height: 2px; background: var(--warm-light); transition: width 0.3s; }
+.nav-links a:hover { color: var(--text); }
+.nav-links a:hover::after { width: 100%; }
+.hero { min-height: 100vh; display: flex; align-items: center; padding: 8rem 5% 4rem; position: relative; }
+.hero::before { content: ''; position: absolute; top: -20%; right: -10%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(234,88,12,0.15) 0%, transparent 60%); animation: floatWarm 10s ease-in-out infinite; }
+@keyframes floatWarm { 0%,100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+.hero-content { max-width: 600px; z-index: 2; }
+.hero-badge { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.5rem 1.2rem; background: rgba(234,88,12,0.15); border: 1px solid rgba(234,88,12,0.3); border-radius: 100px; font-size: 0.85rem; color: var(--warm-light); margin-bottom: 1.5rem; }
+.hero h1 { font-family: 'DM Sans', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; background: linear-gradient(135deg, #fff, var(--warm-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero p { font-size: 1.15rem; color: var(--text-muted); margin-bottom: 2.5rem; max-width: 480px; line-height: 1.8; }
+.cta-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn { padding: 1rem 2.5rem; border-radius: 14px; font-family: inherit; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.4s cubic-bezier(0.4,0,0.2,1); border: none; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; }
+.btn-warm { background: linear-gradient(135deg, var(--warm), #9a3412); color: white; box-shadow: 0 10px 40px rgba(234,88,12,0.35); }
+.btn-warm:hover { transform: translateY(-3px); box-shadow: 0 20px 60px rgba(234,88,12,0.45); }
+.btn-outline { background: transparent; color: var(--text); border: 1px solid var(--glass-border); }
+.btn-outline:hover { background: var(--glass); border-color: var(--warm-light); transform: translateY(-3px); }
+section { padding: 6rem 5%; position: relative; }
+.section-header { text-align: center; max-width: 600px; margin: 0 auto 4rem; }
+.section-header h2 { font-family: 'DM Sans', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-bottom: 1rem; background: linear-gradient(135deg, #fff, var(--warm-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.section-header p { color: var(--text-muted); font-size: 1.1rem; }
+.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; max-width: 1000px; margin: 0 auto; }
+.service-card { padding: 2rem; border-radius: 20px; text-align: center; transition: all 0.4s; }
+.service-card:hover { transform: translateY(-5px); background: rgba(255,255,255,0.08); }
+.service-icon { width: 60px; height: 60px; margin: 0 auto 1.2rem; background: linear-gradient(135deg, var(--warm), #9a3412); border-radius: 50%; display: grid; place-items: center; font-size: 1.6rem; box-shadow: 0 8px 25px rgba(234,88,12,0.3); }
+.menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; max-width: 1000px; margin: 0 auto; }
+.menu-card { padding: 2rem; border-radius: 20px; transition: all 0.4s; text-align: center; }
+.menu-card:hover { transform: translateY(-8px); border-color: rgba(234,88,12,0.3); box-shadow: 0 25px 50px rgba(0,0,0,0.3); }
+.menu-icon { width: 70px; height: 70px; margin: 0 auto 1.5rem; background: linear-gradient(135deg, var(--warm), #9a3412); border-radius: 50%; display: grid; place-items: center; font-size: 1.8rem; box-shadow: 0 10px 40px rgba(234,88,12,0.3); }
+.menu-card h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 0.5rem; }
+.menu-card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; }
+.menu-card .price { font-family: 'DM Sans', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--warm-light); }
+.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; max-width: 900px; margin: 0 auto; }
+.contact-card { padding: 2rem; border-radius: 20px; text-align: center; transition: all 0.4s; }
+.contact-card:hover { transform: translateY(-5px); border-color: var(--warm); }
+.contact-icon { width: 55px; height: 55px; margin: 0 auto 1.2rem; background: linear-gradient(135deg, var(--warm), #9a3412); border-radius: 16px; display: grid; place-items: center; font-size: 1.4rem; box-shadow: 0 8px 25px rgba(234,88,12,0.3); }
+.contact-card h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
+.contact-card p { color: var(--text-muted); font-size: 0.9rem; }
+footer { padding: 3rem 5%; text-align: center; border-top: 1px solid var(--glass-border); background: rgba(26,18,11,0.6); backdrop-filter: blur(10px); }
+footer p { color: var(--text-muted); font-size: 0.9rem; }
+.reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.4,0,0.2,1); }
+.reveal.active { opacity: 1; transform: translateY(0); }
+@media (max-width: 768px) { .nav-links { display: none; } }
+</style>
+</head>
+<body>
+<div class="bg-warm"></div>
+<nav id="navbar"><div class="logo">مقيل</div><ul class="nav-links"><li><a href="#home">الرئيسية</a></li><li><a href="#services">الخدمات</a></li><li><a href="#menu">المنيو</a></li><li><a href="#contact">الموقع</a></li></ul></nav>
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-badge">نزوى · كافيه هادئ · تقييم 4.7 ⭐</div>
+    <h1>مقيل<br>للروح ☕</h1>
+    <p>كافيه مقيل يقدم لك أجواء هادئة ومريحة للاسترخاء والعمل. قهوة مختصة، خدمات متنوعة، وأجواء لا تُنسى.</p>
+    <div class="cta-group"><a href="#menu" class="btn btn-warm">استكشف المنيو</a><a href="#services" class="btn btn-outline">خدماتنا</a></div>
+  </div>
+</section>
+<section id="services">
+  <div class="section-header reveal"><h2>خدمات مقيل</h2><p>أكثر من مجرد قهوة</p></div>
+  <div class="services-grid">
+    <div class="service-card glass reveal"><div class="service-icon">☕</div><h3>قهوة مختصة</h3><p>حبوب محمصة محلياً مع تقنيات تحضير عالمية.</p></div>
+    <div class="service-card glass reveal"><div class="service-icon">💻</div><h3>مساحة عمل</h3><p>واي فاي سريع وأماكن مخصصة للعمل والدراسة.</p></div>
+    <div class="service-card glass reveal"><div class="service-icon">📚</div><h3>ركن القراءة</h3><p>مكتبة متنوعة للقراءة أثناء استمتاعك بقهوتك.</p></div>
+    <div class="service-card glass reveal"><div class="service-icon">🎮</div><h3>ألعاب طاولة</h3><p>شطرنج، ورق، وألعاب طاولة متوفرة للزوار.</p></div>
+  </div>
+</section>
+<section id="menu">
+  <div class="section-header reveal"><h2>منيو مقيل</h2><p>مشروبات وأطباق خفيفة</p></div>
+  <div class="menu-grid">
+    <div class="menu-card glass reveal"><div class="menu-icon">☕</div><h3>لاتيه مقيل</h3><p>إسبريسو مع حليب بخاري ورغوة كريمية.</p><span class="price">2.5 ر.ع</span></div>
+    <div class="menu-card glass reveal"><div class="menu-icon">🍵</div><h3>شاي أخضر</h3><p>شاي أخضر ياباني مع نعناع طازج.</p><span class="price">2 ر.ع</span></div>
+    <div class="menu-card glass reveal"><div class="menu-icon">🥐</div><h3>كرواسان زبدة</h3><p>كرواسان فرنسي طازج مع زبدة وعسل.</p><span class="price">2.2 ر.ع</span></div>
+    <div class="menu-card glass reveal"><div class="menu-icon">🍰</div><h3>كيكة الفانيليا</h3><p>كيكة منزلية مع كريمة الفانيليا والتوت.</p><span class="price">2.8 ر.ع</span></div>
+    <div class="menu-card glass reveal"><div class="menu-icon">🍹</div><h3>عصير برتقال</h3><p>عصير برتقال طازج مع لمسة من النعناع.</p><span class="price">2 ر.ع</span></div>
+    <div class="menu-card glass reveal"><div class="menu-icon">🧁</div><h3>كب كيك الشوكولاتة</h3><p>كب كيك غني مع frosting الشوكولاتة.</p><span class="price">1.8 ر.ع</span></div>
+  </div>
+</section>
+<section id="contact">
+  <div class="section-header reveal"><h2>زورونا</h2><p>ننتظركم في مقيل</p></div>
+  <div class="contact-grid">
+    <div class="contact-card glass reveal"><div class="contact-icon">📍</div><h3>الموقع</h3><p>نزوى<br>سلطنة عُمان</p></div>
+    <div class="contact-card glass reveal"><div class="contact-icon">⭐</div><h3>التقييم</h3><p>4.7/5<br>117 مراجعة</p></div>
+    <div class="contact-card glass reveal"><div class="contact-icon">🕐</div><h3>العمل</h3><p>يومياً<br>7:00 ص - 11:00 م</p></div>
+    <div class="contact-card glass reveal"><div class="contact-icon">📱</div><h3>الحجز</h3><p>متاح عبر<br>الواتساب</p></div>
+  </div>
+</section>
+<footer><p>© 2026 Mqeel Cafe · نزوى، سلطنة عُمان</p></footer>
+<script>
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{if(window.scrollY>50)navbar.classList.add('scrolled');else navbar.classList.remove('scrolled');});
+const observer=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('active');});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+document.querySelectorAll('a[href^="#"]').forEach(anchor=>{anchor.addEventListener('click',function(e){e.preventDefault();document.querySelector(this.getAttribute('href')).scrollIntoView({behavior:'smooth'});});});
+</script>
+</body>
+</html>

@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Olio Italian Restaurant | مطعم أوليو الإيطالي</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --olive: #65a30d;
+  --olive-dark: #3f6212;
+  --wine: #7f1d1d;
+  --wine-light: #b91c1c;
+  --cream: #fefce8;
+  --gold: #ca8a04;
+  --glass: rgba(255,255,255,0.05);
+  --glass-border: rgba(255,255,255,0.12);
+  --text: #fafaf9;
+  --text-muted: #a8a29e;
+  --bg: #0c0a09;
+  --bg-light: #1c1917;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Tajawal', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+.bg-wine {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(127,29,29,0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 80%, rgba(101,163,13,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(202,138,4,0.05) 0%, transparent 60%);
+}
+
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 1.2rem 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.4s ease;
+}
+nav.scrolled {
+  background: rgba(12,10,9,0.92);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+}
+.logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.logo-icon {
+  width: 45px; height: 45px;
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 1.3rem;
+  color: var(--gold);
+}
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  right: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.3s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a:hover::after { width: 100%; }
+
+/* Hero */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 8rem 5% 4rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(127,29,29,0.2) 0%, transparent 60%);
+  animation: floatWine 10s ease-in-out infinite;
+}
+@keyframes floatWine {
+  0%,100% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(-30px,20px) scale(1.05); }
+}
+.hero-content { max-width: 600px; z-index: 2; }
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 1.2rem;
+  background: rgba(202,138,4,0.15);
+  border: 1px solid rgba(202,138,4,0.3);
+  border-radius: 100px;
+  font-size: 0.85rem;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  font-family: 'Cormorant Garamond', serif;
+}
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 1.5rem;
+  color: var(--cream);
+}
+.hero h1 span {
+  color: var(--gold);
+  font-style: italic;
+}
+.hero p {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+  max-width: 480px;
+  line-height: 1.8;
+}
+.cta-group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.btn {
+  padding: 1rem 2.5rem;
+  border-radius: 14px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+.btn-gold {
+  background: linear-gradient(135deg, var(--gold), #92400e);
+  color: white;
+  box-shadow: 0 10px 40px rgba(202,138,4,0.3);
+}
+.btn-gold:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 60px rgba(202,138,4,0.4);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--glass-border);
+}
+.btn-outline:hover {
+  background: var(--glass);
+  border-color: var(--gold);
+  transform: translateY(-3px);
+}
+
+/* Hero Image Area */
+.hero-visual {
+  position: absolute;
+  left: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 400px;
+  height: 500px;
+  border-radius: 30px;
+  overflow: hidden;
+  opacity: 0.8;
+}
+.hero-visual .plate {
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, var(--bg-light), #292524);
+  display: grid;
+  place-items: center;
+  font-size: 8rem;
+  position: relative;
+}
+.hero-visual .plate::after {
+  content: '';
+  position: absolute;
+  inset: 20px;
+  border: 2px solid rgba(202,138,4,0.3);
+  border-radius: 20px;
+}
+
+/* Menu Section */
+section { padding: 6rem 5%; position: relative; }
+.section-header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 4rem;
+}
+.section-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--cream);
+}
+.section-header p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+.menu-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+.menu-tab {
+  padding: 0.8rem 1.8rem;
+  border-radius: 100px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  color: var(--text-muted);
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 0.9rem;
+}
+.menu-tab.active, .menu-tab:hover {
+  background: linear-gradient(135deg, var(--wine), var(--wine-light));
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 8px 30px rgba(127,29,29,0.3);
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.menu-item {
+  padding: 2rem;
+  border-radius: 20px;
+  transition: all 0.4s;
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+.menu-item:hover {
+  transform: translateY(-5px);
+  border-color: rgba(202,138,4,0.3);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+.menu-item-img {
+  width: 80px; height: 80px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--bg-light), #44403c);
+  display: grid;
+  place-items: center;
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+.menu-item-content { flex: 1; }
+.menu-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+.menu-item h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.menu-item .price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+.menu-item p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+.menu-item .tag {
+  display: inline-block;
+  margin-top: 0.8rem;
+  padding: 0.2rem 0.8rem;
+  background: rgba(101,163,13,0.15);
+  border: 1px solid rgba(101,163,13,0.3);
+  border-radius: 100px;
+  font-size: 0.75rem;
+  color: var(--olive);
+  font-weight: 600;
+}
+
+/* Reservation */
+.reservation-form {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 3rem;
+  border-radius: 30px;
+  border: 1px solid rgba(202,138,4,0.2);
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+.form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+.form-group.full { grid-column: 1/-1; }
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 1rem 1.2rem;
+  border-radius: 14px;
+  border: 1px solid var(--glass-border);
+  background: rgba(255,255,255,0.05);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 1rem;
+  transition: all 0.3s;
+  outline: none;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 4px rgba(202,138,4,0.1);
+}
+.form-group textarea { min-height: 100px; resize: vertical; }
+
+/* Atmosphere */
+.atmo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.atmo-item {
+  aspect-ratio: 4/3;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+}
+.atmo-item:nth-child(2) { grid-row: span 2; }
+.atmo-item .atmo-placeholder {
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, var(--bg-light), #292524);
+  display: grid;
+  place-items: center;
+  font-size: 3rem;
+  transition: all 0.4s;
+}
+.atmo-item:hover .atmo-placeholder {
+  background: linear-gradient(135deg, var(--wine-dark), var(--wine));
+}
+.atmo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  display: flex;
+  align-items: flex-end;
+  padding: 1.5rem;
+}
+.atmo-overlay h4 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+/* Contact */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.contact-card {
+  padding: 2rem;
+  border-radius: 20px;
+  text-align: center;
+  transition: all 0.4s;
+}
+.contact-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--gold);
+}
+.contact-icon {
+  width: 55px; height: 55px;
+  margin: 0 auto 1.2rem;
+  background: linear-gradient(135deg, var(--gold), #92400e);
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  font-size: 1.4rem;
+  box-shadow: 0 8px 25px rgba(202,138,4,0.3);
+}
+.contact-card h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
+.contact-card p { color: var(--text-muted); font-size: 0.9rem; }
+.contact-card a { color: var(--gold); text-decoration: none; font-weight: 600; }
+
+/* Footer */
+footer {
+  padding: 3rem 5%;
+  text-align: center;
+  border-top: 1px solid var(--glass-border);
+  background: rgba(12,10,9,0.6);
+  backdrop-filter: blur(10px);
+}
+footer p { color: var(--text-muted); font-size: 0.9rem; font-family: 'Cormorant Garamond', serif; }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.4,0,0.2,1);
+}
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hero-visual { display: none; }
+  .form-grid { grid-template-columns: 1fr; }
+  .atmo-grid { grid-template-columns: 1fr; }
+  .atmo-item:nth-child(2) { grid-row: span 1; }
+}
+</style>
+</head>
+<body>
+<div class="bg-wine"></div>
+
+<nav id="navbar">
+  <div class="logo">
+    <div class="logo-icon">O</div>
+    Olio
+  </div>
+  <ul class="nav-links">
+    <li><a href="#home">الرئيسية</a></li>
+    <li><a href="#menu">المنيو</a></li>
+    <li><a href="#atmosphere">الأجواء</a></li>
+    <li><a href="#reservation">الحجز</a></li>
+    <li><a href="#contact">تواصل</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-badge">نزوى · مطعم إيطالي فاخر · تقييم 4.7</div>
+    <h1>نكهة <span>إيطاليا</span><br>في قلب نزوى</h1>
+    <p>أوليو يقدم تجربة طعام إيطالية أصيلة بمكونات طازجة مستوردة من إيطاليا، في أجواء فاخرة تجمع بين الأصالة والعصرية.</p>
+    <div class="cta-group">
+      <a href="#reservation" class="btn btn-gold">احجز طاولتك</a>
+      <a href="#menu" class="btn btn-outline">استعرض المنيو</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="plate">🍝</div>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="section-header reveal">
+    <h2>قائمة الطعام</h2>
+    <p>أطباق إيطالية أصيلة بأيدي طهاة محترفين</p>
+  </div>
+  <div class="menu-tabs">
+    <button class="menu-tab active">المعكرونة</button>
+    <button class="menu-tab">البيتزا</button>
+    <button class="menu-tab">المقبلات</button>
+    <button class="menu-tab">الحلويات</button>
+    <button class="menu-tab">المشروبات</button>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-item glass reveal">
+      <div class="menu-item-img">🍝</div>
+      <div class="menu-item-content">
+        <div class="menu-item-header">
+          <h3>سباغيتي كاربونارا</h3>
+          <span class="price">6.5 ر.ع</span>
+        </div>
+        <p>معكرونة سباغيتي طازجة مع صلصة الكاربونارا الأصلية، بيض عضوي، جبنة بارميزان، وبيكون مدخن.</p>
+        <span class="tag">الأكثر طلباً</span>
+      </div>
+    </div>
+    <div class="menu-item glass reveal">
+      <div class="menu-item-img">🍕</div>
+      <div class="menu-item-content">
+        <div class="menu-item-header">
+          <h3>بيتزا مارغريتا</h3>
+          <span class="price">5 ر.ع</span>
+        </div>
+        <p>عجينة رقيقة مقرمشة مع صلصة طماطم سان مارزانو، موزاريلا di bufala، وريحان طازج.</p>
+      </div>
+    </div>
+    <div class="menu-item glass reveal">
+      <div class="menu-item-img">🥗</div>
+      <div class="menu-item-content">
+        <div class="menu-item-header">
+          <h3>سلطة كابريزي</h3>
+          <span class="price">4.5 ر.ع</span>
+        </div>
+        <p>طماطم كرزية طازجة، موزاريلا، ريحان، زيت زيتون بكر ممتاز، وخل بلسميك.</p>
+      </div>
+    </div>
+    <div class="menu-item glass reveal">
+      <div class="menu-item-img">🍖</div>
+      <div class="menu-item-content">
+        <div class="menu-item-header">
+          <h3>ريزوتو الفطر</h3>
+          <span class="price">7 ر.ع</span>
+        </div>
+        <p>أرز أربوريو كريمي مع فطر بورسيني طازج، ماسكاربوني، وجبنة بارميزان المبشور.</p>
+      </div>
+    </div>
+    <div class="menu-item glass reveal">
+      <div class="menu-item-img">🍰</div>
+      <div class="menu-item-content">
+        <div class="menu-item-header">
+          <h3>تيراميسو كلاسيك</h3>
+          <span class="price">3.5 ر.ع</span>
+        </div>
+        <p>طبقات من البسكويت المنقوع في القهوة الإيطالية، مع كريمة ماسكاربوني غنية وكاكاو.</p>
+        <span class="tag">حلوى يومية</span>
+      </div>
+    </div>
+    <div class="menu-item glass reveal">
+      <div class="menu-item-img">🍷</div>
+      <div class="menu-item-content">
+        <div class="menu-item-header">
+          <h3>نبيذ كيانتي كلاسيكو</h3>
+          <span class="price">12 ر.ع</span>
+        </div>
+        <p>نبيذ أحمر إيطالي فاخر من توسكانا، مثالي مع الأطباق الغنية واللحوم.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="atmosphere">
+  <div class="section-header reveal">
+    <h2>أجواء أوليو</h2>
+    <p>تصميم داخلي يجسد روح إيطاليا في نزوى</p>
+  </div>
+  <div class="atmo-grid">
+    <div class="atmo-item reveal">
+      <div class="atmo-placeholder">🕯️</div>
+      <div class="atmo-overlay"><h4>إضاءة دافئة</h4></div>
+    </div>
+    <div class="atmo-item reveal">
+      <div class="atmo-placeholder">🍷</div>
+      <div class="atmo-overlay"><h4>قائمة نبيذ فاخرة</h4></div>
+    </div>
+    <div class="atmo-item reveal">
+      <div class="atmo-placeholder">🎻</div>
+      <div class="atmo-overlay"><h4>موسيقى إيطالية</h4></div>
+    </div>
+    <div class="atmo-item reveal">
+      <div class="atmo-placeholder">🌿</div>
+      <div class="atmo-overlay"><h4>مكونات طازجة</h4></div>
+    </div>
+    <div class="atmo-item reveal">
+      <div class="atmo-placeholder">🍽️</div>
+      <div class="atmo-overlay"><h4>طاولات أنيقة</h4></div>
+    </div>
+  </div>
+</section>
+
+<section id="reservation">
+  <div class="section-header reveal">
+    <h2>احجز طاولتك</h2>
+    <p>لحظات لا تُنسى تبدأ بحجز مسبق</p>
+  </div>
+  <form class="reservation-form glass reveal" onsubmit="event.preventDefault(); alert('تم تأكيد حجزك بنجاح! نتطلع لاستقبالك في أوليو.');">
+    <div class="form-grid">
+      <div class="form-group">
+        <label>الاسم الكامل</label>
+        <input type="text" placeholder="أحمد الزدجالي" required>
+      </div>
+      <div class="form-group">
+        <label>رقم الهاتف</label>
+        <input type="tel" placeholder="91234567" required>
+      </div>
+      <div class="form-group">
+        <label>التاريخ</label>
+        <input type="date" required>
+      </div>
+      <div class="form-group">
+        <label>الوقت</label>
+        <input type="time" required>
+      </div>
+      <div class="form-group">
+        <label>عدد الضيوف</label>
+        <select required>
+          <option value="">اختر</option>
+          <option>1</option><option>2</option><option>3</option><option>4</option>
+          <option>5</option><option>6</option><option>7+</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>مناسبة خاصة</label>
+        <select>
+          <option value="">لا شيء</option>
+          <option>عيد ميلاد</option>
+          <option>ذكرى زواج</option>
+          <option>اجتماع عمل</option>
+          <option>أخرى</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label>طلبات خاصة</label>
+        <textarea placeholder="أي حساسية أو طلبات خاصة..."></textarea>
+      </div>
+      <div class="form-group full">
+        <button type="submit" class="btn btn-gold" style="width:100%; justify-content:center;">تأكيد الحجز</button>
+      </div>
+    </div>
+  </form>
+</section>
+
+<section id="contact">
+  <div class="section-header reveal">
+    <h2>زورونا</h2>
+    <p>أوليو ينتظركم في نزوى</p>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-card glass reveal">
+      <div class="contact-icon">📍</div>
+      <h3>الموقع</h3>
+      <p>نزوى<br>بالقرب من جامعة التقنية</p>
+    </div>
+    <div class="contact-card glass reveal">
+      <div class="contact-icon">📱</div>
+      <h3>إنستغرام</h3>
+      <p><a href="https://instagram.com/olio.om" target="_blank">@olio.om</a></p>
+    </div>
+    <div class="contact-card glass reveal">
+      <div class="contact-icon">🕐</div>
+      <h3>ساعات العمل</h3>
+      <p>يومياً<br>12:00 ظ - 11:00 م</p>
+    </div>
+    <div class="contact-card glass reveal">
+      <div class="contact-icon">⭐</div>
+      <h3>التقييم</h3>
+      <p>4.7/5<br>584 مراجعة</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Olio Italian Restaurant · نزوى، سلطنة عُمان · Buon Appetito</p>
+</footer>
+
+<script>
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 50) navbar.classList.add('scrolled');
+  else navbar.classList.remove('scrolled');
+});
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+  });
+});
+// Menu tabs interaction
+const tabs = document.querySelectorAll('.menu-tab');
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

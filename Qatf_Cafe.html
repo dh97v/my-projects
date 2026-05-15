@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qatf Cafe | كافيه قطف</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=DM+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root { --olive: #65a30d; --olive-light: #a3e635; --brown: #78350f; --cream: #fefce8; --glass: rgba(255,255,255,0.06); --glass-border: rgba(255,255,255,0.12); --text: #fafafa; --text-muted: #a3a3a3; --bg: #0f140a; --bg-light: #1a2612; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Tajawal', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+.bg-olive { position: fixed; inset: 0; z-index: -2; background: radial-gradient(ellipse at 30% 20%, rgba(101,163,13,0.12) 0%, transparent 50%), radial-gradient(ellipse at 70% 80%, rgba(120,53,15,0.08) 0%, transparent 50%); }
+.glass { background: var(--glass); backdrop-filter: blur(24px) saturate(160%); -webkit-backdrop-filter: blur(24px) saturate(160%); border: 1px solid var(--glass-border); box-shadow: 0 8px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06); }
+nav { position: fixed; top: 0; width: 100%; z-index: 1000; padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center; transition: all 0.4s ease; }
+nav.scrolled { background: rgba(15,20,10,0.92); backdrop-filter: blur(20px); }
+.logo { font-family: 'DM Sans', sans-serif; font-size: 1.8rem; font-weight: 800; background: linear-gradient(135deg, var(--olive-light), var(--brown)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: all 0.3s; position: relative; }
+.nav-links a::after { content: ''; position: absolute; bottom: -4px; right: 0; width: 0; height: 2px; background: var(--olive-light); transition: width 0.3s; }
+.nav-links a:hover { color: var(--text); }
+.nav-links a:hover::after { width: 100%; }
+.hero { min-height: 100vh; display: flex; align-items: center; padding: 8rem 5% 4rem; position: relative; }
+.hero::before { content: ''; position: absolute; top: -20%; right: -10%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(101,163,13,0.15) 0%, transparent 60%); animation: floatOlive 10s ease-in-out infinite; }
+@keyframes floatOlive { 0%,100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+.hero-content { max-width: 600px; z-index: 2; }
+.hero-badge { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.5rem 1.2rem; background: rgba(101,163,13,0.15); border: 1px solid rgba(101,163,13,0.3); border-radius: 100px; font-size: 0.85rem; color: var(--olive-light); margin-bottom: 1.5rem; }
+.hero h1 { font-family: 'DM Sans', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; background: linear-gradient(135deg, #fff, var(--olive-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero p { font-size: 1.15rem; color: var(--text-muted); margin-bottom: 2.5rem; max-width: 480px; line-height: 1.8; }
+.cta-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn { padding: 1rem 2.5rem; border-radius: 14px; font-family: inherit; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.4s cubic-bezier(0.4,0,0.2,1); border: none; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; }
+.btn-olive { background: linear-gradient(135deg, var(--olive), #3f6212); color: white; box-shadow: 0 10px 40px rgba(101,163,13,0.35); }
+.btn-olive:hover { transform: translateY(-3px); box-shadow: 0 20px 60px rgba(101,163,13,0.45); }
+.btn-outline { background: transparent; color: var(--text); border: 1px solid var(--glass-border); }
+.btn-outline:hover { background: var(--glass); border-color: var(--olive-light); transform: translateY(-3px); }
+section { padding: 6rem 5%; position: relative; }
+.section-header { text-align: center; max-width: 600px; margin: 0 auto 4rem; }
+.section-header h2 { font-family: 'DM Sans', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-bottom: 1rem; background: linear-gradient(135deg, #fff, var(--olive-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.section-header p { color: var(--text-muted); font-size: 1.1rem; }
+.products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; max-width: 1000px; margin: 0 auto; }
+.product-card { padding: 2rem; border-radius: 20px; transition: all 0.4s; text-align: center; }
+.product-card:hover { transform: translateY(-8px); border-color: rgba(101,163,13,0.3); box-shadow: 0 25px 50px rgba(0,0,0,0.3); }
+.product-icon { width: 70px; height: 70px; margin: 0 auto 1.5rem; background: linear-gradient(135deg, var(--olive), #3f6212); border-radius: 50%; display: grid; place-items: center; font-size: 1.8rem; box-shadow: 0 10px 40px rgba(101,163,13,0.3); }
+.product-card h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 0.5rem; }
+.product-card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; }
+.product-card .price { font-family: 'DM Sans', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--olive-light); }
+.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; max-width: 900px; margin: 0 auto; }
+.contact-card { padding: 2rem; border-radius: 20px; text-align: center; transition: all 0.4s; }
+.contact-card:hover { transform: translateY(-5px); border-color: var(--olive); }
+.contact-icon { width: 55px; height: 55px; margin: 0 auto 1.2rem; background: linear-gradient(135deg, var(--olive), #3f6212); border-radius: 16px; display: grid; place-items: center; font-size: 1.4rem; box-shadow: 0 8px 25px rgba(101,163,13,0.3); }
+.contact-card h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
+.contact-card p { color: var(--text-muted); font-size: 0.9rem; }
+footer { padding: 3rem 5%; text-align: center; border-top: 1px solid var(--glass-border); background: rgba(15,20,10,0.6); backdrop-filter: blur(10px); }
+footer p { color: var(--text-muted); font-size: 0.9rem; }
+.reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.4,0,0.2,1); }
+.reveal.active { opacity: 1; transform: translateY(0); }
+@media (max-width: 768px) { .nav-links { display: none; } }
+</style>
+</head>
+<body>
+<div class="bg-olive"></div>
+<nav id="navbar"><div class="logo">قطف</div><ul class="nav-links"><li><a href="#home">الرئيسية</a></li><li><a href="#products">منتجاتنا</a></li><li><a href="#about">عن قطف</a></li><li><a href="#contact">الموقع</a></li></ul></nav>
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-badge">نزوى · كافيه وبن محمص · تقييم 4.5 ⭐</div>
+    <h1>قطف البن<br>الأفضل 🌿</h1>
+    <p>كافيه قطف يقدم لك أجود أنواع البن المحمص طازجاً. ابدأ يومك بقهوة من حبوبنا المختارة بعناية من أفضل المزارع.</p>
+    <div class="cta-group"><a href="#products" class="btn btn-olive">تسوق الآن</a><a href="#about" class="btn btn-outline">اكتشف المزيد</a></div>
+  </div>
+</section>
+<section id="products">
+  <div class="section-header reveal"><h2>منتجات قطف</h2><p>بن محمص طازج ومشروبات مميزة</p></div>
+  <div class="products-grid">
+    <div class="product-card glass reveal"><div class="product-icon">☕</div><h3>بن يمني محمص</h3><p>بن يمني درجة حمص متوسطة مع نوتات توت وشوكولاتة.</p><span class="price">8 ر.ع / 250g</span></div>
+    <div class="product-card glass reveal"><div class="product-icon">🫘</div><h3>بن إثيوبي</h3><p>بن إثيوبي ييرجاتشيف درجة حمص فاتحة مع نوتات زهرية.</p><span class="price">10 ر.ع / 250g</span></div>
+    <div class="product-card glass reveal"><div class="product-icon">🌰</div><h3>بن كولومبي</h3><p>بن كولومبي هويلا درجة حمص داكنة مع نوتات كراميل.</p><span class="price">9 ر.ع / 250g</span></div>
+    <div class="product-card glass reveal"><div class="product-icon">🫗</div><h3>قهوة مختصة</h3><p>كوب قهوة مختصة من اختيارك: V60، Chemex، أو Aeropress.</p><span class="price">3 ر.ع</span></div>
+    <div class="product-card glass reveal"><div class="product-icon">🧊</div><h3>كولد برو</h3><p>قهوة باردة منقعه 18 ساعة مع نوتات شوكولاتة ولوز.</p><span class="price">3.5 ر.ع</span></div>
+    <div class="product-card glass reveal"><div class="product-icon">🎁</div><h3>بوكس هدايا</h3><p>بوكس يحتوي على 3 أنواع بن + كوب + طاحونة يدوية.</p><span class="price">35 ر.ع</span></div>
+  </div>
+</section>
+<section id="about">
+  <div class="section-header reveal"><h2>عن قطف</h2><p>من المزرعة إلى كوبك</p></div>
+  <div class="products-grid">
+    <div class="product-card glass reveal"><div class="product-icon">🌱</div><h3>محاصيل طازجة</h3><p>نشتري حبوبنا مباشرة من المزارعين المعتمدين.</p></div>
+    <div class="product-card glass reveal"><div class="product-icon">🔥</div><h3>تحميص يدوي</h3><p>نحمص حبوبنا يدوياً في نزوى للحفاظ على الطعم الأصيل.</p></div>
+    <div class="product-card glass reveal"><div class="product-icon">📦</div><h3>توصيل سريع</h3><p>نوصل منتجاتك الطازجة لباب منزلك في نزوى.</p></div>
+  </div>
+</section>
+<section id="contact">
+  <div class="section-header reveal"><h2>تواصل معنا</h2><p>زورونا في قطف</p></div>
+  <div class="contact-grid">
+    <div class="contact-card glass reveal"><div class="contact-icon">📍</div><h3>الموقع</h3><p>نزوى<br>سلطنة عُمان</p></div>
+    <div class="contact-card glass reveal"><div class="contact-icon">⭐</div><h3>التقييم</h3><p>4.5/5<br>204 مراجعة</p></div>
+    <div class="contact-card glass reveal"><div class="contact-icon">🕐</div><h3>العمل</h3><p>يومياً<br>7:00 ص - 10:00 م</p></div>
+    <div class="contact-card glass reveal"><div class="contact-icon">📱</div><h3>الطلب</h3><p>متاح عبر<br>الواتساب</p></div>
+  </div>
+</section>
+<footer><p>© 2026 Qatf Cafe · نزوى، سلطنة عُمان · Freshly Roasted</p></footer>
+<script>
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{if(window.scrollY>50)navbar.classList.add('scrolled');else navbar.classList.remove('scrolled');});
+const observer=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('active');});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+document.querySelectorAll('a[href^="#"]').forEach(anchor=>{anchor.addEventListener('click',function(e){e.preventDefault();document.querySelector(this.getAttribute('href')).scrollIntoView({behavior:'smooth'});});});
+</script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Iny Mini Spa | سبا إيني ميني</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root { --lavender: #a855f7; --lavender-light: #e9d5ff; --pink: #ec4899; --pink-light: #fbcfe8; --gold: #d97706; --glass: rgba(255,255,255,0.06); --glass-border: rgba(255,255,255,0.12); --text: #fafafa; --text-muted: #a3a3a3; --bg: #1a1033; --bg-light: #2e1065; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Tajawal', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+.bg-lavender { position: fixed; inset: 0; z-index: -2; background: radial-gradient(ellipse at 30% 20%, rgba(168,85,247,0.12) 0%, transparent 50%), radial-gradient(ellipse at 70% 80%, rgba(236,72,153,0.08) 0%, transparent 50%); }
+.glass { background: var(--glass); backdrop-filter: blur(24px) saturate(160%); -webkit-backdrop-filter: blur(24px) saturate(160%); border: 1px solid var(--glass-border); box-shadow: 0 8px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06); }
+nav { position: fixed; top: 0; width: 100%; z-index: 1000; padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center; transition: all 0.4s ease; }
+nav.scrolled { background: rgba(26,16,51,0.92); backdrop-filter: blur(20px); }
+.logo { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 700; background: linear-gradient(135deg, var(--lavender-light), var(--pink-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: all 0.3s; position: relative; }
+.nav-links a::after { content: ''; position: absolute; bottom: -4px; right: 0; width: 0; height: 2px; background: linear-gradient(90deg, var(--lavender-light), var(--pink-light)); transition: width 0.3s; }
+.nav-links a:hover { color: var(--text); }
+.nav-links a:hover::after { width: 100%; }
+.hero { min-height: 100vh; display: flex; align-items: center; padding: 8rem 5% 4rem; position: relative; }
+.hero::before { content: ''; position: absolute; top: -20%; right: -10%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(168,85,247,0.15) 0%, transparent 60%); animation: floatLavender 10s ease-in-out infinite; }
+@keyframes floatLavender { 0%,100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+.hero-content { max-width: 600px; z-index: 2; }
+.hero-badge { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.5rem 1.2rem; background: rgba(168,85,247,0.15); border: 1px solid rgba(168,85,247,0.3); border-radius: 100px; font-size: 0.85rem; color: var(--lavender-light); margin-bottom: 1.5rem; font-family: 'Cormorant Garamond', serif; }
+.hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 700; line-height: 1.1; margin-bottom: 1.5rem; background: linear-gradient(135deg, #fff, var(--lavender-light), var(--pink-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero p { font-size: 1.15rem; color: var(--text-muted); margin-bottom: 2.5rem; max-width: 480px; line-height: 1.8; }
+.cta-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn { padding: 1rem 2.5rem; border-radius: 14px; font-family: inherit; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.4s cubic-bezier(0.4,0,0.2,1); border: none; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; }
+.btn-lavender { background: linear-gradient(135deg, var(--lavender), var(--pink)); color: white; box-shadow: 0 10px 40px rgba(168,85,247,0.35); }
+.btn-lavender:hover { transform: translateY(-3px); box-shadow: 0 20px 60px rgba(168,85,247,0.45); }
+.btn-outline { background: transparent; color: var(--text); border: 1px solid var(--glass-border); }
+.btn-outline:hover { background: var(--glass); border-color: var(--lavender-light); transform: translateY(-3px); }
+section { padding: 6rem 5%; position: relative; }
+.section-header { text-align: center; max-width: 600px; margin: 0 auto 4rem; }
+.section-header h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; margin-bottom: 1rem; background: linear-gradient(135deg, #fff, var(--lavender-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.section-header p { color: var(--text-muted); font-size: 1.1rem; }
+.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; max-width: 1000px; margin: 0 auto; }
+.service-card { padding: 2.5rem; border-radius: 24px; transition: all 0.5s cubic-bezier(0.4,0,0.2,1); position: relative; overflow: hidden; text-align: center; }
+.service-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(168,85,247,0.1), rgba(236,72,153,0.05)); opacity: 0; transition: opacity 0.4s; }
+.service-card:hover::before { opacity: 1; }
+.service-card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0,0,0,0.4); border-color: rgba(168,85,247,0.3); }
+.service-icon { width: 70px; height: 70px; margin: 0 auto 1.5rem; background: linear-gradient(135deg, var(--lavender), var(--pink)); border-radius: 50%; display: grid; place-items: center; font-size: 1.8rem; box-shadow: 0 10px 40px rgba(168,85,247,0.3); position: relative; z-index: 1; }
+.service-card h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 0.8rem; position: relative; z-index: 1; }
+.service-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; position: relative; z-index: 1; }
+.service-card .price { display: inline-block; margin-top: 1.2rem; padding: 0.4rem 1.2rem; background: rgba(217,119,6,0.15); border: 1px solid rgba(217,119,6,0.3); border-radius: 100px; color: var(--gold); font-weight: 700; font-size: 0.9rem; position: relative; z-index: 1; }
+.booking-form { max-width: 650px; margin: 0 auto; padding: 3rem; border-radius: 30px; }
+.form-group { margin-bottom: 1.5rem; }
+.form-group label { display: block; font-size: 0.9rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.5rem; }
+.form-group input, .form-group select, .form-group textarea { width: 100%; padding: 1rem 1.2rem; border-radius: 14px; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.05); color: var(--text); font-family: inherit; font-size: 1rem; outline: none; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--lavender); box-shadow: 0 0 0 4px rgba(168,85,247,0.1); }
+.form-group textarea { min-height: 100px; resize: vertical; }
+.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; max-width: 900px; margin: 0 auto; }
+.contact-card { padding: 2rem; border-radius: 20px; text-align: center; transition: all 0.4s; }
+.contact-card:hover { transform: translateY(-5px); border-color: var(--lavender); }
+.contact-icon { width: 55px; height: 55px; margin: 0 auto 1.2rem; background: linear-gradient(135deg, var(--lavender), var(--pink)); border-radius: 16px; display: grid; place-items: center; font-size: 1.4rem; box-shadow: 0 8px 25px rgba(168,85,247,0.3); }
+.contact-card h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
+.contact-card p { color: var(--text-muted); font-size: 0.9rem; }
+footer { padding: 3rem 5%; text-align: center; border-top: 1px solid var(--glass-border); background: rgba(26,16,51,0.6); backdrop-filter: blur(10px); }
+footer p { color: var(--text-muted); font-size: 0.9rem; font-family: 'Cormorant Garamond', serif; }
+.reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.4,0,0.2,1); }
+.reveal.active { opacity: 1; transform: translateY(0); }
+@media (max-width: 768px) { .nav-links { display: none; } }
+</style>
+</head>
+<body>
+<div class="bg-lavender"></div>
+<nav id="navbar"><div class="logo">Iny Mini Spa</div><ul class="nav-links"><li><a href="#home">الرئيسية</a></li><li><a href="#services">الخدمات</a></li><li><a href="#booking">احجزي</a></li><li><a href="#contact">الموقع</a></li></ul></nav>
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-badge">نزوى · سبا نسائي خاص · تقييم 4.5 ⭐</div>
+    <h1>استرخاء<br>يستحقينه 💆‍♀️</h1>
+    <p>سبا إيني ميني في نزوى يقدم تجربة استرخاء فاخرة للسيدات فقط. جلسات مساج، عناية بالبشرة، وعلاجات سبا متكاملة في أجواء خاصة وهادئة.</p>
+    <div class="cta-group"><a href="#booking" class="btn btn-lavender">احجزي جلستك</a><a href="#services" class="btn btn-outline">استكشفي الخدمات</a></div>
+  </div>
+</section>
+<section id="services">
+  <div class="section-header reveal"><h2>خدماتنا الفاخرة</h2><p>نقدم لكِ أرقى علاجات السبا بأجود المنتجات</p></div>
+  <div class="services-grid">
+    <div class="service-card glass reveal"><div class="service-icon">💆‍♀️</div><h3>مساج استرخائي</h3><p>مساج سويدي كامل للجسم بزيوت عطرية طبيعية لإزالة التوتر.</p><span class="price">20 ر.ع</span></div>
+    <div class="service-card glass reveal"><div class="service-icon">✨</div><h3>جلسة فيشل</h3><p>تنظيف عميق، تقشير، استخراج الرؤوس السوداء، وهيدراشن مكثف.</p><span class="price">25 ر.ع</span></div>
+    <div class="service-card glass reveal"><div class="service-icon">🧖‍♀️</div><h3>حمام مغربي</h3><p>تقشير كامل للجسم بالصابون البلدي والليفة المغربية وزيت الأرغان.</p><span class="price">18 ر.ع</span></div>
+    <div class="service-card glass reveal"><div class="service-icon">💅</div><h3>مانيكير وباديكير</h3><p>عناية كاملة باليدين والقدمين مع طلاء جيل أو عادي.</p><span class="price">10 ر.ع</span></div>
+    <div class="service-card glass reveal"><div class="service-icon">🌸</div><h3>علاج الأروماثيرابي</h3><p>جلسة استرخاء بالزيوت العطرية والشموع المعطرة والموسيقى الهادئة.</p><span class="price">22 ر.ع</span></div>
+    <div class="service-card glass reveal"><div class="service-icon">🦶</div><h3>مساج القدمين</h3><p>مساج ريفلكسولوجي للقدمين يعيد التوازن والطاقة للجسم.</p><span class="price">12 ر.ع</span></div>
+  </div>
+</section>
+<section id="booking">
+  <div class="section-header reveal"><h2>احجزي موعدكِ</h2><p>خصوصية تامة وراحة لا مثيل لها</p></div>
+  <form class="booking-form glass reveal" onsubmit="event.preventDefault(); alert('تم تأكيد حجزكِ بنجاح! سنتواصل معكِ قريباً.');">
+    <div class="form-group"><label>الاسم الكامل</label><input type="text" placeholder="فاطمة العامرية" required></div>
+    <div class="form-group"><label>رقم الهاتف</label><input type="tel" placeholder="91234567" required></div>
+    <div class="form-group"><label>الخدمة</label><select required><option value="">اختر الخدمة</option><option>مساج استرخائي</option><option>جلسة فيشل</option><option>حمام مغربي</option><option>مانيكير وباديكير</option><option>علاج الأروماثيرابي</option><option>مساج القدمين</option></select></div>
+    <div class="form-group"><label>التاريخ والوقت</label><input type="datetime-local" required></div>
+    <div class="form-group"><label>ملاحظات</label><textarea placeholder="أي تفاصيل خاصة..."></textarea></div>
+    <button type="submit" class="btn btn-lavender" style="width:100%; justify-content:center;">تأكيد الحجز</button>
+  </form>
+</section>
+<section id="contact">
+  <div class="section-header reveal"><h2>تواصلي معنا</h2><p>ننتظركِ في سبا إيني ميني</p></div>
+  <div class="contact-grid">
+    <div class="contact-card glass reveal"><div class="contact-icon">📍</div><h3>الموقع</h3><p>نزوى<br>سلطنة عُمان</p></div>
+    <div class="contact-card glass reveal"><div class="contact-icon">⭐</div><h3>التقييم</h3><p>4.5/5<br>50+ مراجعة</p></div>
+    <div class="contact-card glass reveal"><div class="contact-icon">🕐</div><h3>العمل</h3><p>السبت - الخميس<br>10:00 ص - 8:00 م</p></div>
+    <div class="contact-card glass reveal"><div class="contact-icon">🔒</div><h3>الخصوصية</h3><p>نسائي 100%<br>فريق نسائي كامل</p></div>
+  </div>
+</section>
+<footer><p>© 2026 Iny Mini Spa · نزوى، سلطنة عُمان · Pamper Yourself</p></footer>
+<script>
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{if(window.scrollY>50)navbar.classList.add('scrolled');else navbar.classList.remove('scrolled');});
+const observer=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('active');});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+document.querySelectorAll('a[href^="#"]').forEach(anchor=>{anchor.addEventListener('click',function(e){e.preventDefault();document.querySelector(this.getAttribute('href')).scrollIntoView({behavior:'smooth'});});});
+</script>
+</body>
+</html>
